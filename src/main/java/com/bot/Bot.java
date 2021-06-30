@@ -30,12 +30,13 @@ public class Bot extends TelegramLongPollingBot {
 
     public Bot(){
 
-        System.setProperty("webdriver.chrome.driver", System.getenv("GOOGLE_CHROME_BIN"));
+        System.setProperty("webdriver.chrome.driver", "src/chromedriver/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         //options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
         options.addArguments("--headless");
         options.addArguments("--disable-gpu");
         options.addArguments("-no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
 
         chromeDriver = new ChromeDriver(options);
@@ -72,7 +73,7 @@ public class Bot extends TelegramLongPollingBot {
         chromeDriver.manage().window().setSize(new Dimension(1920,1080));
 
 
-        chromeDriver.get("https://yandex.ru/lab/yalm?style=6");
+        chromeDriver.get("https://yandex.ru/lab/yalm?style=1");
 
         String respon = "";
 
@@ -143,11 +144,13 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return Constants.sysEnv.get("BOT_NAME");
+
+        return "wtcnstestbot";
     }
 
     @Override
     public String getBotToken() {
-        return Constants.sysEnv.get("BOT_TOKEN");
+
+        return "1820940667:AAG0FaRvo3F4puhZpP9kqxpaavvHieH7rSQ";
     }
 }

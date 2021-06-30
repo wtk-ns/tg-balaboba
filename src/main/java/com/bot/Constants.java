@@ -2,12 +2,14 @@ package com.bot;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 public final class Constants {
     public static final Map<String, String> sysEnv = System.getenv();
+
 
     private static List<ChatMember> members = new ArrayList<>();
     public static Logger logger = Logger.getLogger(Main.class.getName());
@@ -31,6 +33,8 @@ public final class Constants {
         }
 
     }
+
+
 
     @NotNull
     public static ChatMember getMember(Long chatID){
