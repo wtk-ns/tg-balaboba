@@ -2,8 +2,11 @@ package com.bot;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -26,8 +29,15 @@ public class Bot extends TelegramLongPollingBot {
 
     public Bot(){
 
-        System.setProperty("webdriver.chrome.driver", "src/chromedriver/chromedriver.exe");
-        chromeDriver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_DRIVER_PATH"));
+        ChromeOptions options = new ChromeOptions();
+        options.setBinary(System.getenv("CHROME_BINARY_PATH"));
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("-no-sandbox");
+
+
+        chromeDriver = new ChromeDriver(options);
 
     }
 
