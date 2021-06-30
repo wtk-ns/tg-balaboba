@@ -29,9 +29,9 @@ public class Bot extends TelegramLongPollingBot {
 
     public Bot(){
 
-        System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_DRIVER_PATH"));
+        //System.setProperty("webdriver.chrome.driver", System.getenv("GOOGLE_CHROME_BIN"));
         ChromeOptions options = new ChromeOptions();
-        options.setBinary(System.getenv("CHROME_BINARY_PATH"));
+        options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
         options.addArguments("--headless");
         options.addArguments("--disable-gpu");
         options.addArguments("-no-sandbox");
