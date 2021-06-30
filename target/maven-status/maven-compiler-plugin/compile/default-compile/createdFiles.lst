@@ -2,4 +2,5 @@ com\bot\Constants.class
 com\bot\AlreadyChatMember.class
 com\bot\Main.class
 com\bot\Bot.class
+com\bot\BobaThread.class
 com\bot\ChatMember.class

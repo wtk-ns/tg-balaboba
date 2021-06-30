@@ -79,9 +79,9 @@
                     <version>3.0.3</version>
                     <configuration>
                         <appName>wotkins-bot</appName>
-                        <jdkVersion>14.0.2</jdkVersion>
+                        <jdkVersion>8</jdkVersion>
                         <processTypes>
-                            <worker>java $JAVA_OPTS -cp target/classes:target/dependency/* org.example.App</worker>
+                            <worker>java $JAVA_OPTS -cp target/classes:target/dependency/* com.bot.Main</worker>
                         </processTypes>
                     </configuration>
                 </plugin>
