@@ -2,6 +2,7 @@ package com.bot;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,9 +30,9 @@ public class Bot extends TelegramLongPollingBot {
 
     public Bot(){
 
-        //System.setProperty("webdriver.chrome.driver", System.getenv("GOOGLE_CHROME_BIN"));
+        System.setProperty("webdriver.chrome.driver", System.getenv("GOOGLE_CHROME_BIN"));
         ChromeOptions options = new ChromeOptions();
-        options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
+        //options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
         options.addArguments("--headless");
         options.addArguments("--disable-gpu");
         options.addArguments("-no-sandbox");
@@ -68,7 +69,7 @@ public class Bot extends TelegramLongPollingBot {
 
         isParse = true;
 
-        chromeDriver.manage().window().maximize();
+        chromeDriver.manage().window().setSize(new Dimension(1920,1080));
 
 
         chromeDriver.get("https://yandex.ru/lab/yalm?style=6");
