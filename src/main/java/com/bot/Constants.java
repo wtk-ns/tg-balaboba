@@ -15,7 +15,7 @@ public final class Constants {
     public static Logger logger = Logger.getLogger(Main.class.getName());
 
 
-    private static void addMember(Long chatID) throws AlreadyChatMember{
+    private static void addMember(Long chatID) throws AlreadyChatMemberException{
 
         logger.info("Adding member");
 
@@ -29,7 +29,7 @@ public final class Constants {
             members.add(new ChatMember(chatID));
             logger.info("New member: " + chatID + " added");
         } else {
-            throw new AlreadyChatMember();
+            throw new AlreadyChatMemberException();
         }
 
     }
@@ -43,7 +43,7 @@ public final class Constants {
 
         try {
             addMember(chatID);
-        } catch (AlreadyChatMember e) {
+        } catch (AlreadyChatMemberException e) {
             logger.info("Member: " + chatID + " is already chat member");
         }
 
@@ -64,8 +64,8 @@ public final class Constants {
 
 }
 
-class AlreadyChatMember extends Exception{
-    public AlreadyChatMember() {
+class AlreadyChatMemberException extends Exception{
+    public AlreadyChatMemberException() {
         super("This member already exists in com.bot.Constants List<ChatMembers> members");
     }
 }

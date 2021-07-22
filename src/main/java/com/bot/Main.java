@@ -7,8 +7,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 public class Main {
     public static void main(String[] args) {
+
         ApiContextInitializer.init();
         TelegramBotsApi api = new TelegramBotsApi();
+
         try {
             api.registerBot(new Bot());
 
@@ -16,8 +18,6 @@ public class Main {
         {
             exception.printStackTrace();
         }
-
-
 
     }
 }
