@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Новая папка (2)" />
         <module name="tgbalaboba" />
+        <module name="tg-balaboba" />
       </profile>
     </annotationProcessing>
   </component>

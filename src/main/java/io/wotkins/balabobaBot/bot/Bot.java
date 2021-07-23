@@ -1,43 +1,42 @@
-package com.bot;
+package io.wotkins.balabobaBot.bot;
 
 
+import io.wotkins.balabobaBot.utility.PropertiesLoader;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import java.util.Properties;
 
 
 public class Bot extends TelegramLongPollingBot {
 
     private boolean isParse = false;
-    private ChromeDriver chromeDriver;
-    private static final Map<String, String> getenv = System.getenv();
+    private final ChromeDriver chromeDriver;
 
-    public Bot(){
-        chromeDriver = WebDriver.getDriver();
+    private static final Map<String, String> getenv = System.getenv();
+    private static final Properties properties = PropertiesLoader.getProperties();
+
+
+    public Bot(ChromeDriver chromeDriver){
+        this.chromeDriver = chromeDriver;
     }
 
     @Override
     public void onUpdateReceived(Update update) {
         if (update.getMessage().getText().equals("/start")){
-            sendMsg(update.getMessage().getChatId(), "Ога, пиши начало фразы в чат.\nДа, он долгий\nПросто написал - подождал");
+            sendMsg(update.getMessage().getChatId(), properties.getProperty("startMessage"));
         } else {
             if (!isParse) {
                 try {
-                    String response = getTexty(update.getMessage().getText());
+                    String response = getText(update.getMessage().getText());
                     sendMsg(update.getMessage().getChatId(), response);
                     isParse = false;
                 } catch (Exception exception) {
@@ -47,11 +46,9 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    public String getTexty(String text) throws Exception{
-        isParse = true;
-        chromeDriver.manage().window().setSize(new Dimension(1920,1080));
-        chromeDriver.get("https://yandex.ru/lab/yalm?style=1");
+    public String getText(String text){
 
+        isParse = true;
         String responceText = "";
 
         try {
@@ -75,8 +72,9 @@ public class Bot extends TelegramLongPollingBot {
 
             responceText = response.getText();
         } catch (Exception e){
-            responceText = "Чета нет";
+            responceText = properties.getProperty("errorMessage");
         }
+        chromeDriver.close();
 
         return responceText;
     }
@@ -94,9 +92,7 @@ public class Bot extends TelegramLongPollingBot {
         } catch (TelegramApiException exception) {
             exception.printStackTrace();
         }
-
     }
-
 
     @Override
     public String getBotUsername() {

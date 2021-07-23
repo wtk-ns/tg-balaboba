@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>io.wotkins.bot</groupId>
     <artifactId>tgbalaboba</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -15,13 +15,11 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
@@ -81,7 +79,8 @@
                         <appName>tg-bala</appName>
                         <jdkVersion>8</jdkVersion>
                         <processTypes>
-                            <worker>java $JAVA_OPTS -cp target/classes:target/dependency/* com.bot.Main</worker>
+                            <worker>java $JAVA_OPTS -cp target/classes:target/dependency/*
+                                io.wotkins.balabobaBot.bot.Main</worker>
                         </processTypes>
                     </configuration>
                 </plugin>
